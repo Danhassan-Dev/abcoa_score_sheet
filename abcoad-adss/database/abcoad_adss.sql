@@ -47,6 +47,8 @@ CREATE TABLE academic_sessions (
 CREATE TABLE semesters (
   id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
   semester_name VARCHAR(50) NOT NULL UNIQUE,
+  description TEXT NULL,
+  status ENUM('active','inactive') NOT NULL DEFAULT 'active',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB;
 

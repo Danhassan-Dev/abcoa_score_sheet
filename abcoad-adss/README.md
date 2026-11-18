@@ -38,3 +38,10 @@ The default storage directory is inside the project and protected by Apache acce
 
 ## Roles and policy
 The current database roles are `admin` and `staff`. HOD permissions have not been implemented because the institution's approval policy has not yet been confirmed. Do not upload real examination records until role permissions, retention and backup policies are agreed and acceptance tests pass.
+
+## Phase 10 — Academic Data Management
+See `README_PHASE_10.md`. Administrators manage departments, courses, academic sessions, semesters and examination types at `admin/academic-data.php`. Existing Phase 9 databases require the one-time `database/phase10_migration.sql` upgrade for semester activation status.
+
+
+## Phase 11
+See `README_PHASE_11.md` for the academic sidebar navigation and semester description changes.

@@ -49,7 +49,7 @@ if ($isAdmin) {
 $courses = $courseStmt->fetchAll();
 
 $sessions = $pdo->query("SELECT id, session_name FROM academic_sessions WHERE status = 'active' ORDER BY session_name DESC")->fetchAll();
-$semesters = $pdo->query("SELECT id, semester_name FROM semesters ORDER BY id")->fetchAll();
+$semesters = $pdo->query("SELECT id, semester_name FROM semesters WHERE status = 'active' ORDER BY id")->fetchAll();
 $examTypes = $pdo->query("SELECT id, examination_name FROM examination_types WHERE status = 'active' ORDER BY examination_name")->fetchAll();
 
 $settingStmt = $pdo->prepare("SELECT setting_value FROM system_settings WHERE setting_key = :setting_key LIMIT 1");
@@ -95,9 +95,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $sessionCheck->execute(['id' => $sessionId]);
     if (!$sessionCheck->fetchColumn()) $errors[] = 'Select an active academic session.';
 
-    $semesterCheck = $pdo->prepare("SELECT COUNT(*) FROM semesters WHERE id = :id");
+    $semesterCheck = $pdo->prepare("SELECT COUNT(*) FROM semesters WHERE id = :id AND status = 'active'");
     $semesterCheck->execute(['id' => $semesterId]);
-    if (!$semesterCheck->fetchColumn()) $errors[] = 'Select a valid semester.';
+    if (!$semesterCheck->fetchColumn()) $errors[] = 'Select a valid active semester.';
 
     if ($examTypeId !== null && $examTypeId > 0) {
         $examCheck = $pdo->prepare("SELECT COUNT(*) FROM examination_types WHERE id = :id AND status = 'active'");

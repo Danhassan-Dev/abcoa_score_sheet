@@ -66,6 +66,11 @@ $formatDate = static function (?string $date): string {
       <a class="nav-link" href="../documents/archive.php"><span class="nav-icon">▤</span>Document Archive</a>
       <?php if ($isAdmin): ?><a class="nav-link" href="verification.php"><span class="nav-icon">✓</span>Verification Centre <span class="nav-count"><?= $dashboard['pending_documents'] ?></span></a><?php else: ?><button class="nav-link" type="button" disabled title="Administrator access only"><span class="nav-icon">✓</span>Verification Centre</button><?php endif; ?>
       <?php if ($isAdmin): ?>
+        <div class="nav-label">ACADEMIC SETUP</div>
+        <a class="nav-link" href="academic-data.php?section=departments"><span class="nav-icon">▦</span>Departments</a>
+        <a class="nav-link" href="academic-data.php?section=courses"><span class="nav-icon">▤</span>Courses</a>
+        <a class="nav-link" href="academic-data.php?section=sessions"><span class="nav-icon">◷</span>Academic Sessions</a>
+        <a class="nav-link" href="academic-data.php?section=semesters"><span class="nav-icon">▣</span>Semesters</a>
         <a class="nav-link" href="users.php"><span class="nav-icon">♙</span>Staff Management</a>
       <?php else: ?>
         <button class="nav-link" type="button" disabled title="Administrator access only"><span class="nav-icon">♙</span>Staff Management</button>
@@ -145,6 +150,7 @@ $formatDate = static function (?string $date): string {
           <article class="panel quick-panel">
             <div class="panel-heading"><div><h3>Quick actions</h3><p>Common tasks</p></div></div>
             <?php if ($isAdmin): ?>
+              <a class="quick-action" href="academic-data.php"><span class="quick-icon green">▣</span><span><b>Manage academic data</b><small>Departments, courses, sessions and semesters</small></span><i>›</i></a>
               <a class="quick-action" href="users.php"><span class="quick-icon blue">♙</span><span><b>Manage staff</b><small>Create accounts and manage access</small></span><i>›</i></a>
             <?php endif; ?>
             <a class="quick-action" href="../documents/upload.php"><span class="quick-icon blue">⇧</span><span><b>Upload score sheet</b><small>Archive a scanned examination record</small></span><i>›</i></a>
