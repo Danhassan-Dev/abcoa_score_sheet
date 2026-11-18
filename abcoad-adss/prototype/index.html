@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ABCOAD | Digital Examination Score Sheet Archive</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <img src="logo.png" alt="Audu Bako College of Agriculture logo" class="brand-logo">
+        <div class="brand-name">AUDU BAKO COLLEGE<br>OF AGRICULTURE, DAMBATTA</div>
+        <div class="brand-tag">DIGITAL SCORE SHEET ARCHIVE</div>
+      </div>
+      <div class="nav-label">WORKSPACE</div>
+      <nav class="nav-menu">
+        <button class="nav-link active" data-page="dashboard"><span class="nav-icon">▦</span>Dashboard</button>
+        <button class="nav-link" data-page="upload"><span class="nav-icon">⇧</span>Upload Score Sheet</button>
+        <button class="nav-link" data-page="archive"><span class="nav-icon">▤</span>Document Archive</button>
+        <button class="nav-link" data-page="verification"><span class="nav-icon">✓</span>Verification <span class="nav-count" id="pendingNav">2</span></button>
+        <button class="nav-link" data-page="staff"><span class="nav-icon">♙</span>Staff Management</button>
+        <button class="nav-link" data-page="activity"><span class="nav-icon">◷</span>Activity Logs</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <button class="nav-link" data-page="settings"><span class="nav-icon">⚙</span>Settings</button>
+        <div class="sidebar-user">
+          <div class="avatar">AD</div><div><b>Administrator</b><small>System Admin</small></div>
+          <span class="dots">•••</span>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-area">
+      <header class="topbar">
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+        <div class="topbar-title">
+          <span class="eyebrow">AUDU BAKO COLLEGE OF AGRICULTURE, DAMBATTA</span>
+          <h1 id="pageTitle">Dashboard</h1>
+        </div>
+        <div class="topbar-actions">
+          <button class="icon-button" title="Notifications">♧<i class="notification-dot"></i></button>
+          <div class="top-profile"><div class="avatar">AD</div><div><b>Admin User</b><small>Administrator</small></div><span>⌄</span></div>
+        </div>
+      </header>
+
+      <div class="content">
+        <!-- DASHBOARD -->
+        <section class="page active" id="page-dashboard">
+          <div class="welcome-banner">
+            <div class="welcome-copy">
+              <span class="welcome-kicker">DIGITAL RECORDS, SAFELY PRESERVED</span>
+              <h2>Welcome back, Administrator</h2>
+              <p>Manage, preserve and retrieve examination score sheets in one secure archive.</p>
+              <button class="btn btn-gold" data-go="upload">＋ Upload score sheet <span>→</span></button>
+            </div>
+            <div class="banner-mark"><img src="logo.png" alt=""></div>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-card"><div class="stat-icon blue">▤</div><div><span>Total documents</span><strong id="totalStat">1,248</strong><small>All archived records</small></div></article>
+            <article class="stat-card"><div class="stat-icon green">✓</div><div><span>Verified documents</span><strong id="verifiedStat">1,120</strong><small>Approved archive records</small></div></article>
+            <article class="stat-card"><div class="stat-icon amber">◷</div><div><span>Pending review</span><strong id="pendingStat">2</strong><small>Awaiting verification</small></div></article>
+            <article class="stat-card"><div class="stat-icon violet">▦</div><div><span>Departments</span><strong>12</strong><small>Academic departments</small></div></article>
+          </div>
+
+          <div class="dashboard-grid">
+            <article class="panel recent-panel">
+              <div class="panel-heading"><div><h3>Recent uploads</h3><p>Latest examination records added to the archive</p></div><button class="text-button" data-go="archive">View archive →</button></div>
+              <div class="table-wrap"><table><thead><tr><th>DOCUMENT</th><th>COURSE</th><th>SESSION</th><th>UPLOADED BY</th><th>STATUS</th><th></th></tr></thead><tbody id="recentRows"></tbody></table></div>
+            </article>
+            <article class="panel quick-panel">
+              <div class="panel-heading"><div><h3>Quick actions</h3><p>Common tasks</p></div></div>
+              <button class="quick-action" data-go="upload"><span class="quick-icon blue">⇧</span><span><b>Upload score sheet</b><small>Add a new document</small></span><i>›</i></button>
+              <button class="quick-action" data-go="archive"><span class="quick-icon green">⌕</span><span><b>Search archive</b><small>Find an old score sheet</small></span><i>›</i></button>
+              <button class="quick-action" data-go="verification"><span class="quick-icon amber">✓</span><span><b>Review submissions</b><small>Verify pending documents</small></span><i>›</i></button>
+            </article>
+          </div>
+          <div class="notice"><span>ⓘ</span><div><b>Archive reminder</b><p>Always confirm the uploaded image or PDF is clear and complete before submitting it for verification.</p></div></div>
+        </section>
+
+        <!-- UPLOAD -->
+        <section class="page" id="page-upload">
+          <div class="page-intro"><div><h2>Upload score sheet</h2><p>Upload a photograph, scanned image or PDF of a completed examination score sheet.</p></div><span class="step-pill">New archive record</span></div>
+          <form id="uploadForm" class="upload-layout">
+            <div class="panel form-panel">
+              <h3>Document information</h3><p class="section-help">Enter the details that will help staff find this document later.</p>
+              <div class="form-grid">
+                <label>Department <select required id="department"><option value="">Select department</option><option>Computer Science</option><option>Agricultural Technology</option><option>Animal Health and Production</option><option>Statistics</option><option>Science Laboratory Technology</option><option>Mathematics</option></select></label>
+                <label>Course code <input required id="courseCode" placeholder="e.g. CSC 301"></label>
+                <label class="full">Course title <input required id="courseTitle" placeholder="Enter course title"></label>
+                <label>Academic session <select required id="session"><option value="">Select session</option><option>2026/2027</option><option>2025/2026</option><option>2024/2025</option><option>2023/2024</option></select></label>
+                <label>Semester <select required id="semester"><option value="">Select semester</option><option>First Semester</option><option>Second Semester</option></select></label>
+                <label>Lecturer name <input required id="lecturer" placeholder="Enter lecturer name"></label>
+                <label>Document reference <input id="reference" placeholder="Optional reference number"></label>
+                <label class="full">Description / notes <textarea id="notes" rows="3" placeholder="Optional notes about this score sheet"></textarea></label>
+              </div>
+            </div>
+            <div class="panel file-panel">
+              <h3>Attach score sheet</h3><p class="section-help">Supported formats: JPG, PNG and PDF.</p>
+              <label class="drop-zone" id="dropZone" for="fileInput">
+                <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.pdf,image/jpeg,image/png,application/pdf" hidden>
+                <span class="upload-cloud">⇧</span><b>Drag and drop your file here</b><span>or <u>browse files</u></span><small>Maximum file size: 10 MB</small>
+              </label>
+              <div class="file-preview" id="filePreview"><span class="file-symbol">▤</span><div><b id="fileName">No file selected</b><small id="fileSize">Choose a document to continue</small></div><button type="button" id="removeFile" class="remove-file" aria-label="Remove file">×</button></div>
+              <div class="upload-tip"><b>Before you upload</b><ul><li>Ensure all student names and scores are visible.</li><li>Include every page of the score sheet.</li><li>Upload the original, unaltered document.</li></ul></div>
+              <button class="btn btn-primary btn-wide" type="submit">Submit for verification <span>→</span></button>
+              <p class="privacy-note">Your document will be marked as pending until reviewed.</p>
+            </div>
+          </form>
+        </section>
+
+        <!-- ARCHIVE -->
+        <section class="page" id="page-archive">
+          <div class="page-intro"><div><h2>Document archive</h2><p>Browse and retrieve examination score sheets stored in the system.</p></div><button class="btn btn-primary" data-go="upload">＋ Upload document</button></div>
+          <div class="panel archive-panel">
+            <div class="filter-row">
+              <div class="search-box"><span>⌕</span><input id="archiveSearch" placeholder="Search course, lecturer, department or file..."></div>
+              <select id="statusFilter"><option value="">All statuses</option><option>Verified</option><option>Pending</option><option>Rejected</option></select>
+              <select id="sessionFilter"><option value="">All sessions</option><option>2026/2027</option><option>2025/2026</option><option>2024/2025</option></select>
+            </div>
+            <div class="archive-meta"><span id="resultCount">5 documents</span><button class="text-button" id="clearFilters">Clear filters</button></div>
+            <div class="table-wrap"><table><thead><tr><th>DOCUMENT</th><th>COURSE</th><th>DEPARTMENT</th><th>SESSION / SEMESTER</th><th>UPLOADED BY</th><th>STATUS</th><th>ACTIONS</th></tr></thead><tbody id="archiveRows"></tbody></table></div>
+            <div class="table-footer"><span>Showing <b id="showingCount">5</b> records</span><span class="pagination">‹ <b>1</b> ›</span></div>
+          </div>
+        </section>
+
+        <!-- VERIFICATION -->
+        <section class="page" id="page-verification">
+          <div class="page-intro"><div><h2>Verification centre</h2><p>Review uploaded documents before adding them to the verified archive.</p></div><span class="step-pill" id="verificationCount">2 awaiting review</span></div>
+          <div class="panel"><div class="panel-heading"><div><h3>Pending submissions</h3><p>Check document quality and record details.</p></div></div><div id="verificationList" class="review-list"></div></div>
+        </section>
+
+        <!-- STAFF -->
+        <section class="page" id="page-staff">
+          <div class="page-intro"><div><h2>Staff management</h2><p>Manage staff accounts and their access to the score sheet archive.</p></div><button class="btn btn-primary" id="addStaffBtn">＋ Add staff member</button></div>
+          <div class="panel"><div class="panel-heading"><div><h3>Registered staff</h3><p>Demonstration accounts for the interface prototype.</p></div></div><div class="table-wrap"><table><thead><tr><th>STAFF MEMBER</th><th>DEPARTMENT</th><th>ROLE</th><th>ACCOUNT STATUS</th><th></th></tr></thead><tbody id="staffRows"></tbody></table></div></div>
+        </section>
+
+        <!-- ACTIVITY -->
+        <section class="page" id="page-activity">
+          <div class="page-intro"><div><h2>Activity logs</h2><p>A record of actions performed in the archive.</p></div></div>
+          <div class="panel"><div class="panel-heading"><div><h3>Recent system activity</h3><p>Activity shown here is sample data for the prototype.</p></div></div><div id="activityList" class="activity-list"></div></div>
+        </section>
+
+        <!-- SETTINGS -->
+        <section class="page" id="page-settings">
+          <div class="page-intro"><div><h2>System settings</h2><p>Institution details and archive preferences.</p></div></div>
+          <div class="panel settings-panel"><div class="settings-brand"><img src="logo.png" alt="College logo"><div><h3>Audu Bako College of Agriculture, Dambatta</h3><p>Digital Examination Score Sheet Archive (ADSS)</p></div></div><hr><div class="settings-row"><div><b>Institution name</b><small>Displayed throughout the system</small></div><strong>Audu Bako College of Agriculture, Dambatta</strong></div><div class="settings-row"><div><b>Allowed file formats</b><small>Documents accepted by the archive</small></div><strong>JPG · PNG · PDF</strong></div><div class="settings-row"><div><b>Maximum upload size</b><small>Per document</small></div><strong>10 MB</strong></div><div class="settings-row"><div><b>Verification workflow</b><small>New uploads require review</small></div><span class="status pending">Enabled</span></div><div class="notice"><span>ⓘ</span><div><b>Prototype notice</b><p>This frontend mockup does not yet connect to a database or securely store uploaded documents. PHP and MySQL integration is the next development stage.</p></div></div></div>
+        </section>
+      </div>
+      <footer class="footer"><span>© 2026 Audu Bako College of Agriculture, Dambatta.</span><span>Digital Examination Score Sheet Archive</span></footer>
+    </main>
+  </div>
+
+  <div class="modal-backdrop" id="previewModal">
+    <div class="modal">
+      <div class="modal-head"><div><span class="eyebrow">DOCUMENT DETAILS</span><h3 id="modalTitle">Score sheet preview</h3></div><button class="modal-close" id="closeModal">×</button></div>
+      <div class="preview-content" id="previewContent"></div>
+      <div class="modal-actions"><button class="btn btn-light" id="closeModalBottom">Close</button><button class="btn btn-primary" id="downloadDemo">Download details</button></div>
+    </div>
+  </div>
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>
